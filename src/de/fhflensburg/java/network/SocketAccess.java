@@ -15,7 +15,7 @@ public class SocketAccess
 		{
 			OutputStream rOutput = aSocket.getOutputStream();
 			InputStream rInput = aSocket.getInputStream();
-			String sRequest = "GET /index.html HTTP/1.0\r\n\r\n";
+			String sRequest = "GET /index.html HTTP/1.1\r\nHost: www.example.com\r\n\r\n";
 			byte[] aBuffer = new byte[2048];
 			int nReadCount;
 
