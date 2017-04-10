@@ -1,4 +1,4 @@
-#Mon Apr 03 16:39:25 CEST 2017
+#Mon Apr 03 16:55:16 CEST 2017
 \!/=
 /configuration/com.genuitec.eclipse.core/account.1000.last.check=skip.dialog
 /configuration/com.genuitec.eclipse.core/pointsHistory=201609\=5,201610\=3106,201611\=4031,201700\=18343,201701\=12633,201702\=4688
@@ -80,6 +80,7 @@
 /instance/org.eclipse.egit.core/GitRepositoriesView.GitDirectories=S\:\\eclipse\\FH-SS2017\\SS2017\\.git;
 /instance/org.eclipse.egit.core/GitRepositoriesView.GitDirectories.relative=SS2017\\.git;
 /instance/org.eclipse.egit.ui/always_use_staging_view=false
+/instance/org.eclipse.egit.ui/commit_dialog_history_messages=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<messages>\r\n<message>Socket Request HTTP/1.1</message>\r\n<message>Socket Request HTTP/1.0</message>\r\n<message>Initial commit</message>\r\n</messages>
 /instance/org.eclipse.egit.ui/decorator_filetext_decoration={name}
 /instance/org.eclipse.egit.ui/decorator_foldertext_decoration={name}
 /instance/org.eclipse.egit.ui/decorator_projecttext_decoration={name} [{repository }{branch}{ branch_status}]
@@ -88,6 +89,9 @@
 /instance/org.eclipse.epp.logging.aeri.ide/resetSendMode=KEEP
 /instance/org.eclipse.epp.logging.aeri.ide/resetSendModeOn=0
 /instance/org.eclipse.epp.logging.aeri.ide/sendMode=NOTIFY
+/instance/org.eclipse.jdt.core/org.eclipse.jdt.core.classpathVariable.JRE_LIB=G\:/Java/jdk1.8.0/jre/lib/rt.jar
+/instance/org.eclipse.jdt.core/org.eclipse.jdt.core.classpathVariable.JRE_SRC=G\:/Java/jdk1.8.0/src.zip
+/instance/org.eclipse.jdt.core/org.eclipse.jdt.core.classpathVariable.JRE_SRCROOT=
 /instance/org.eclipse.jdt.core/org.eclipse.jdt.core.codeComplete.argumentPrefixes=r,s,a,n,e,f,p,c,b,q
 /instance/org.eclipse.jdt.core/org.eclipse.jdt.core.codeComplete.fieldPrefixes=r,s,a,n,e,f,p,c,b,q
 /instance/org.eclipse.jdt.core/org.eclipse.jdt.core.codeComplete.localPrefixes=r,s,a,n,e,f,p,c,b,q
@@ -401,7 +405,7 @@
 /instance/org.eclipse.jdt.core/org.eclipse.jdt.core.formatter.wrap_before_conditional_operator=true
 /instance/org.eclipse.jdt.core/org.eclipse.jdt.core.formatter.wrap_before_or_operator_multicatch=true
 /instance/org.eclipse.jdt.core/org.eclipse.jdt.core.formatter.wrap_outer_expressions_when_nested=true
-/instance/org.eclipse.jdt.launching/org.eclipse.jdt.launching.PREF_VM_XML=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?>\r\n<vmSettings defaultVM\="57,org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType13,1491225539554">\r\n<vmType id\="org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType">\r\n<vm id\="1491225539554" javadocURL\="https\://docs.oracle.com/javase/8/docs/api/" name\="jre1.8.0_121" path\="C\:\\Program Files\\Java\\jre1.8.0_121"/>\r\n</vmType>\r\n</vmSettings>\r\n
+/instance/org.eclipse.jdt.launching/org.eclipse.jdt.launching.PREF_VM_XML=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?>\r\n<vmSettings defaultVM\="57,org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType13,1491230937101">\r\n<vmType id\="org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType">\r\n<vm id\="1491225539554" name\="jre1.8.0_121" path\="C\:\\Program Files\\Java\\jre1.8.0_121"/>\r\n<vm id\="1491230937101" name\="jdk1.8.0" path\="G\:\\Java\\jdk1.8.0" vmargs\="-ea"/>\r\n</vmType>\r\n</vmSettings>\r\n
 /instance/org.eclipse.jdt.ui/content_assist_disabled_computers=org.eclipse.jdt.ui.textProposalCategory\u0000org.eclipse.recommenders.calls.rcp.proposalCategory.templates\u0000org.eclipse.mylyn.java.ui.javaAllProposalCategory\u0000org.eclipse.jdt.ui.javaAllProposalCategory\u0000org.eclipse.jdt.ui.javaTypeProposalCategory\u0000org.eclipse.jdt.ui.javaNoTypeProposalCategory\u0000org.eclipse.recommenders.chain.rcp.proposalCategory.chain\u0000
 /instance/org.eclipse.jdt.ui/content_assist_number_of_computers=25
 /instance/org.eclipse.jdt.ui/content_assist_proposals_background=255,255,255
@@ -432,6 +436,8 @@
 /instance/org.eclipse.jdt.ui/org.eclipse.jface.textfont=1|Hack|12.0|0|WINDOWS|1|-24|0|0|0|400|0|0|0|0|3|2|1|49|Hack;
 /instance/org.eclipse.jdt.ui/outlinesortoption=SF,SI,I,F,C,SM,M,T,
 /instance/org.eclipse.jdt.ui/proposalOrderMigrated=true
+/instance/org.eclipse.jdt.ui/smart_semicolon=true
+/instance/org.eclipse.jdt.ui/sourceHoverBackgroundColor=255,255,225
 /instance/org.eclipse.jdt.ui/sp_cleanup.add_default_serial_version_id=false
 /instance/org.eclipse.jdt.ui/sp_cleanup.add_generated_serial_version_id=false
 /instance/org.eclipse.jdt.ui/sp_cleanup.add_missing_annotations=true
