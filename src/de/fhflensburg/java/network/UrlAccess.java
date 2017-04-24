@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.LineNumberReader;
 import java.net.URL;
+import java.net.URLConnection;
 
 public class UrlAccess
 {
@@ -12,9 +13,11 @@ public class UrlAccess
 	{
 		try
 		{
-			URL aUrl = new URL("http://www.example.com");
+			URL aUrl = new URL("https://www.example.com");
 
-			try (InputStream rInput = aUrl.openStream())
+			URLConnection rConnection = aUrl.openConnection();
+
+			try (InputStream rInput = rConnection.getInputStream())
 			{
 				LineNumberReader aInputReader = new LineNumberReader(
 						new InputStreamReader(rInput));

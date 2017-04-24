@@ -7,12 +7,17 @@ import java.io.LineNumberReader;
 import java.io.OutputStream;
 import java.net.Socket;
 
+import javax.net.SocketFactory;
+import javax.net.ssl.SSLSocketFactory;
+
 public class SocketAccess
 {
 	static public void main(String[] args)
 	{
+		SocketFactory rSocketFactory = SSLSocketFactory.getDefault();
 
-		try (Socket aSocket = new Socket("www.example.com", 80))
+		try (Socket aSocket = rSocketFactory.createSocket("www.example.com",
+				443))
 		{
 			OutputStream rOutput = aSocket.getOutputStream();
 			InputStream rInput = aSocket.getInputStream();
