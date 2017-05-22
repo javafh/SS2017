@@ -4,8 +4,10 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.concurrent.CompletableFuture;
 import java.util.logging.Logger;
 
 public class Server
@@ -37,12 +39,14 @@ public class Server
 		try (ServerSocket aServerSocket = new ServerSocket(nListeningPort))
 		{
 			Logger.getGlobal()
-					.info("Server started, listening on " + nListeningPort);
+			.info(String.format("Server started, listening on %s:%d",
+					InetAddress.getLocalHost(), nListeningPort));
 			while (true)
 			{
 				Socket rClientSocket = aServerSocket.accept();
 
-				handleClientRequest(rClientSocket);
+				CompletableFuture
+						.runAsync(() -> handleClientRequest(rClientSocket));
 			}
 
 		}
@@ -67,10 +71,16 @@ public class Server
 			if ("PING".equals(sRequest))
 			{
 				rOutput.write("PONG".getBytes());
+				Logger.getGlobal().info("Request received from "
+						+ rClientSocket.getInetAddress());
 			}
 			else
 			{
 				rOutput.write(("Unknown request: " + sRequest).getBytes());
+				String sLogMessage = String.format(
+						"Invalid request: %s from %s",
+						sRequest, rClientSocket.getInetAddress());
+				Logger.getGlobal().warning(sLogMessage);
 			}
 		}
 		catch (IOException e)
