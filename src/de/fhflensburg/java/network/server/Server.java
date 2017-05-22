@@ -12,17 +12,18 @@ import java.util.logging.Logger;
 
 public class Server
 {
-
+	private RequestHandler rRequestHandler;
 	private int nListeningPort;
 
-	public Server(int nListeningPort)
+	public Server(RequestHandler rRequestHandler, int nListeningPort)
 	{
+		this.rRequestHandler = rRequestHandler;
 		this.nListeningPort = nListeningPort;
 	}
 
 	public static void main(String[] rArgs)
 	{
-		Server aServer = new Server(8000);
+		Server aServer = new Server(new PingPongRequestHandler(), 8000);
 
 		try
 		{
@@ -41,12 +42,14 @@ public class Server
 			Logger.getGlobal()
 			.info(String.format("Server started, listening on %s:%d",
 					InetAddress.getLocalHost(), nListeningPort));
+
 			while (true)
 			{
 				Socket rClientSocket = aServerSocket.accept();
 
+
 				CompletableFuture
-						.runAsync(() -> handleClientRequest(rClientSocket));
+				.runAsync(() -> handleClientRequest(rClientSocket));
 			}
 
 		}
@@ -56,34 +59,15 @@ public class Server
 	{
 		try
 		{
+			Logger.getGlobal().info(
+					"Request received from " + rClientSocket.getInetAddress());
+
 			InputStream rInput = rClientSocket.getInputStream();
 			OutputStream rOutput = rClientSocket.getOutputStream();
-			ByteArrayOutputStream aRequest = new ByteArrayOutputStream();
-			int nByte;
 
-			while (aRequest.size() < 4 && (nByte = rInput.read()) > 0)
-			{
-				aRequest.write(nByte);
-			}
-
-			String sRequest = new String(aRequest.toByteArray());
-
-			if ("PING".equals(sRequest))
-			{
-				rOutput.write("PONG".getBytes());
-				Logger.getGlobal().info("Request received from "
-						+ rClientSocket.getInetAddress());
-			}
-			else
-			{
-				rOutput.write(("Unknown request: " + sRequest).getBytes());
-				String sLogMessage = String.format(
-						"Invalid request: %s from %s",
-						sRequest, rClientSocket.getInetAddress());
-				Logger.getGlobal().warning(sLogMessage);
-			}
+			rRequestHandler.handleRequest(rInput, rOutput);
 		}
-		catch (IOException e)
+		catch (Exception e)
 		{
 			Logger.getGlobal().warning(e.getMessage());
 		}
@@ -101,4 +85,33 @@ public class Server
 		}
 	}
 
+	public static class PingPongRequestHandler implements RequestHandler
+	{
+		@Override
+		public void handleRequest(InputStream rInput, OutputStream rOutput)
+				throws IOException
+		{
+			ByteArrayOutputStream aRequest = new ByteArrayOutputStream();
+			int nByte;
+
+			while (aRequest.size() < 4 && (nByte = rInput.read()) > 0)
+			{
+				aRequest.write(nByte);
+			}
+
+			String sRequest = new String(aRequest.toByteArray());
+
+			if ("PING".equals(sRequest))
+			{
+				rOutput.write("PONG".getBytes());
+			}
+			else
+			{
+				rOutput.write(("Unknown request: " + sRequest).getBytes());
+				String sLogMessage = String.format(
+						"Invalid request: %s", sRequest);
+				Logger.getGlobal().warning(sLogMessage);
+			}
+		}
+	}
 }

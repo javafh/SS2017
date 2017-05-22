@@ -11,7 +11,7 @@ public class Client
 
 	public static void main(String[] args)
 	{
-		try (Socket aSocket = new Socket("172.16.69.88", 8000))
+		try (Socket aSocket = new Socket("localhost", 8000))
 		{
 			InputStream rInput = aSocket.getInputStream();
 			OutputStream rOutput = aSocket.getOutputStream();
