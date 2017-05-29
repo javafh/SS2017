@@ -1,28 +1,35 @@
 package de.fhflensburg.java.network.server.http;
 
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.LineNumberReader;
 import java.io.OutputStream;
 
 import de.fhflensburg.java.network.server.RequestHandler;
 
 public class HttpRequestHandler implements RequestHandler
 {
-
 	@Override
 	public void handleRequest(InputStream rRequestStream,
 			OutputStream rResponseStream) throws Exception
 	{
-		LineNumberReader aRequestReader = new LineNumberReader(
-				new InputStreamReader(rRequestStream));
+		HttpRequest aRequest = new HttpRequest(rRequestStream);
 
-		String sRequestLine = aRequestReader.readLine();
-		String[] aRequestElements = sRequestLine.split(" ");
+		handleRequestMethod(aRequest, rRequestStream, rResponseStream);
+	}
 
-		if (aRequestElements.length != 3)
+	private void handleRequestMethod(HttpRequest rRequest,
+			InputStream rRequestStream, OutputStream rResponseStream)
+	{
+		switch (rRequest.getRequestMethod())
 		{
-			throw new HttpStatusException(HttpStatusCode.BAD_REQUEST, "Invalid request");
+			case DELETE :
+				break;
+			case GET :
+				break;
+			case POST :
+				break;
+			case PUT :
+				break;
+
 		}
 	}
 

@@ -1,6 +1,5 @@
 package de.fhflensburg.java.network.server;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -19,20 +18,6 @@ public class Server
 	{
 		this.rRequestHandler = rRequestHandler;
 		this.nListeningPort = nListeningPort;
-	}
-
-	public static void main(String[] rArgs)
-	{
-		Server aServer = new Server(new PingPongRequestHandler(), 8000);
-
-		try
-		{
-			aServer.run();
-		}
-		catch (Exception e)
-		{
-			Logger.getGlobal().severe(e.getMessage());
-		}
 	}
 
 	public void run() throws Exception
@@ -81,36 +66,6 @@ public class Server
 			{
 				Logger.getGlobal().warning(
 						"Could not close client socket: " + e.getMessage());
-			}
-		}
-	}
-
-	public static class PingPongRequestHandler implements RequestHandler
-	{
-		@Override
-		public void handleRequest(InputStream rInput, OutputStream rOutput)
-				throws IOException
-		{
-			ByteArrayOutputStream aRequest = new ByteArrayOutputStream();
-			int nByte;
-
-			while (aRequest.size() < 4 && (nByte = rInput.read()) > 0)
-			{
-				aRequest.write(nByte);
-			}
-
-			String sRequest = new String(aRequest.toByteArray());
-
-			if ("PING".equals(sRequest))
-			{
-				rOutput.write("PONG".getBytes());
-			}
-			else
-			{
-				rOutput.write(("Unknown request: " + sRequest).getBytes());
-				String sLogMessage = String.format(
-						"Invalid request: %s", sRequest);
-				Logger.getGlobal().warning(sLogMessage);
 			}
 		}
 	}
