@@ -33,14 +33,17 @@ public class HttpRequest
 
 		rDataStream = rRequestStream;
 	}
+
 	public InputStream getDataStream()
 	{
 		return rDataStream;
 	}
+
 	public Map<String, String> getHeaders()
 	{
 		return aHeaders;
 	}
+
 	public HttpRequestMethod getRequestMethod()
 	{
 		return eRequestMethod;
@@ -49,6 +52,12 @@ public class HttpRequest
 	public String getResource()
 	{
 		return sResource;
+	}
+
+	private void badRequest(String sMessage)
+	{
+		throw new HttpStatusException(HttpStatusCode.BAD_REQUEST,
+				sMessage);
 	}
 
 	private void checkHttpVersion(String sVersion)
@@ -60,8 +69,7 @@ public class HttpRequest
 		}
 	}
 
-	private String[] parseRequestLine(String sRequestLine)
-			throws IOException
+	private String[] parseRequestLine(String sRequestLine) throws IOException
 	{
 		String[] aRequestElements = sRequestLine.split(" ");
 
@@ -73,6 +81,12 @@ public class HttpRequest
 		return aRequestElements;
 	}
 
+	/***************************************
+	 * TODO: `Description`
+	 *
+	 * @param sMethod
+	 * @return
+	 */
 	private HttpRequestMethod parseRequestMethod(String sMethod)
 	{
 		try
@@ -81,14 +95,30 @@ public class HttpRequest
 		}
 		catch (Exception e)
 		{
-			throw new HttpStatusException(HttpStatusCode.BAD_REQUEST,
-					"Unknown method: " + sMethod);
+			badRequest("Unknown method: " + sMethod);
 		}
 	}
 
-	private void readHeaders(LineNumberReader rRequestReader)
+	/**
+	 * Read and parse all header lines into the headers map.
+	 *
+	 * @param rRequestReader A reader that is positioned on the request headers
+	 */
+	private void readHeaders(LineNumberReader rRequestReader) throws IOException
 	{
-		// TODO Add method code here
+		String sLine;
 
+		// read header lines until CRLF
+		while (!(sLine = rRequestReader.readLine()).isEmpty())
+		{
+			String[] aHeader = sLine.split(":");
+
+			if (aHeader.length != 2 && aHeader[0].length() > 0)
+			{
+				badRequest("Invalid header property: " + sLine);
+			}
+
+		}
 	}
 }
+
